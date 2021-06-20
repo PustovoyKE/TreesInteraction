@@ -1,0 +1,64 @@
+
+.itemsTree {
+	width: 100%;
+	margin: 0 auto;
+	height: 500px;
+	border: 2px solid #999;
+	margin: 8px;
+	overflow: auto;
+	cursor: pointer;
+}
+
+.itemsTree:focus {
+	border: 2px solid aqua;
+}
+
+.item {
+	padding: 0 8px;
+	cursor: grab;
+}
+
+.item p {
+	margin: 0;
+	padding: 0;
+}
+
+.input {
+	border: none;
+	background-color: none;
+	width: 100%;
+}
+
+.item:focus {
+	background-color : aqua;
+}
+
+.buttons ul {
+	padding: 0;
+	margin: 8px;
+	display: flex;
+}
+
+.buttons ul li {
+	list-style-type: none;
+	margin-right: 12px;
+}
+
+.buttons ul li a {
+	padding: 8px;
+}
+
+button {
+	cursor: pointer;
+	display: block;
+	background-color: #999;
+	height: 24px;
+	width: 80px;
+	font-weight: 600;
+	border: none;
+}
+
+.itemTreesContainer {
+	display: flex;
+}
+
