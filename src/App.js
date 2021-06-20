@@ -57,6 +57,7 @@ function App() {
 
 	function editItem() {
 		if (selectedItem === undefined || selectedInput.target.children[0] === undefined) return;
+
 		selectedInput.target.children[0].disabled = false;
 		selectedInput.target.children[0].focus();
 	}
@@ -108,6 +109,8 @@ function App() {
 		if (dragItem.parent === null) return;
 		//Нельзя переносить родителя в потомков
 		if (dragItem === selectedItem.parent) return;
+		//Нельзя переносить в себя
+		if (dragItem === selectedItem) return;
 		
 		removeItem(dragItem);
 		addItem(dragItem);
