@@ -102,8 +102,23 @@ function App() {
 
 		//Нельзя переносить корневой объект
 		if (dragItem.parent === null) return;
+
 		//Нельзя переносить родителя в потомков
-		if (dragItem === selectedItem.parent) return;
+		function isParent(parent, child) {
+			if (child.parent == null) {
+				return false;
+			}
+			else {
+				if (parent === child.parent) {
+					return true;
+				}
+				else {
+					return isParent(parent, child.parent);
+				}
+			}
+		}
+		if (isParent(dragItem, selectedItem)) return;
+		
 		//Нельзя переносить в себя
 		if (dragItem === selectedItem) return;
 		
