@@ -61,6 +61,8 @@ function App() {
 
 	function resetState() {
 		id = 0;
+		setSelectedItem(undefined);
+		setDragItem(null);
 		setState(() => [itemFactory(-1), itemFactory(-2), itemFactory(-3)]);
 	}
 
@@ -101,7 +103,7 @@ function App() {
 		e.stopPropagation();
 
 		//Нельзя переносить корневой объект
-		if (dragItem.parent === null) return;
+		if (dragItem == null || dragItem.parent === null) return;
 
 		//Нельзя переносить родителя в потомков
 		function isParent(parent, child) {
