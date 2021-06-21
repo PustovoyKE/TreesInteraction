@@ -15,11 +15,7 @@ function itemFactory(id, name="Node_") {
 }
 
 let id = 0;
-const initialState = {
-	itemTreeOne: [itemFactory(-1, "ROOT")],
-	itemTreeTwo: [itemFactory(-1, "ROOT")],
-	itemTreeThree: [itemFactory(-1, "ROOT")]
-}
+const initialState = [itemFactory(-1), itemFactory(-2), itemFactory(-3)];
 
 function App() {
 	const [state, setState] = useState(initialState);
@@ -36,7 +32,8 @@ function App() {
 
 		newItem.parent = selectedItem;
 		selectedItem.children.push(newItem);
-		setState(prev => ({...prev}));
+		
+		setState(prev => [...prev]);
 	}
 
 	function removeItem(item) {
@@ -51,7 +48,7 @@ function App() {
 			item.parent.children.splice(index, 1);
 		}
 
-		setState(prev => ({...prev}));
+		setState(prev => [...prev]);
 		setSelectedItem(undefined);
 	}
 
@@ -64,29 +61,26 @@ function App() {
 
 	function resetState() {
 		id = 0;
-		setState({
-			itemTreeOne: [itemFactory(-1, "ROOT")],
-			itemTreeTwo: [itemFactory(-1, "ROOT")],
-			itemTreeThree: [itemFactory(-1, "ROOT")]
-		});
+		setState(() => [itemFactory(-1), itemFactory(-2), itemFactory(-3)]);
 	}
 
 	function focusHandler(e, item) {
 		e.stopPropagation();
-		console.log(item);
+
 		setSelectedItem(item);
 		setSelectedInput(e);
 	}
 
 	function blurHandler(e) {
 		e.stopPropagation();
+
 		e.target.disabled  = true;
 	}
 
 	function changeHandler(e, item) {
 		setState(prev => {
 			item.name = e.target.value;
-			return {...prev};
+			return [...prev];
 		});
 	}
 
@@ -98,6 +92,7 @@ function App() {
 	function dragOverHandler(e, item){
 		e.preventDefault();
 		e.stopPropagation();
+
 		setSelectedItem(item);
 	}
 
@@ -116,33 +111,28 @@ function App() {
 		addItem(dragItem);
 	}
 
+	function rootFocusHandler(e, item) {
+		e.stopPropagation();
+		setSelectedItem(item);
+	}
+
 	return (
 		<div className="App">
 			<div className="itemTreesContainer">
-				<ItemTree
-					items={state.itemTreeOne}
-					onBlur={blurHandler}
-					onFocus={focusHandler}
-					onChange={changeHandler}
-					onDragStart={dragStartHandler}
-					onDragOver={dragOverHandler}
-					onDrop={dropHandler}/>
-				<ItemTree
-					items={state.itemTreeTwo}
-					onBlur={blurHandler}
-					onFocus={focusHandler}
-					onChange={changeHandler}
-					onDragStart={dragStartHandler}
-					onDragOver={dragOverHandler}
-					onDrop={dropHandler}/>
-				<ItemTree
-					items={state.itemTreeThree}
-					onBlur={blurHandler}
-					onFocus={focusHandler}
-					onChange={changeHandler}
-					onDragStart={dragStartHandler}
-					onDragOver={dragOverHandler}
-					onDrop={dropHandler}/>
+			{
+				state.map(i => 
+					<ItemTree
+						key={i.id}
+						items={i.children}
+						onRootFocus={e => rootFocusHandler(e, i)}
+						onBlur={blurHandler}
+						onFocus={focusHandler}
+						onChange={changeHandler}
+						onDragStart={dragStartHandler}
+						onDragOver={dragOverHandler}
+						onDrop={dropHandler}/>
+				)
+			}
 			</div>
 			
 			<div className="buttons">

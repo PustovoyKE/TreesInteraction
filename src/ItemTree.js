@@ -4,7 +4,7 @@ import Item from './Item';
 export default function ItemTree(props) {
 	
 	return (
-		<div className="itemsTree" tabIndex="0">
+		<div className="itemsTree" tabIndex="0" onFocus={props.onRootFocus}>
 			<Item
 				items={props.items}
 				onFocus={props.onFocus}
