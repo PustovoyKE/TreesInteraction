@@ -120,11 +120,12 @@ function App() {
 		<div className="App">
 			<div className="itemTreesContainer">
 			{
-				state.map(i => 
+				state.map(i =>
 					<ItemTree
 						key={i.id}
 						items={i.children}
 						onRootFocus={e => rootFocusHandler(e, i)}
+						onRootDragOver={e => dragOverHandler(e, i)}
 						onBlur={blurHandler}
 						onFocus={focusHandler}
 						onChange={changeHandler}
