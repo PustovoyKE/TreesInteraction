@@ -3,14 +3,17 @@
 	width: 100%;
 	margin: 0 auto;
 	height: 500px;
-	border: 2px solid #999;
+	border: 1px solid #999;
 	margin: 8px;
 	overflow: auto;
 	cursor: pointer;
+	border-radius: 3px;
+	box-shadow: 2px 2px 12px 0px rgba(34, 60, 80, 0.2) inset;
 }
 
 .itemsTree:focus {
-	border: 2px solid aqua;
+	border: 1px solid rgba(0, 255, 255);
+	box-shadow: 2px 2px 12px 0px rgba(0, 255, 255, 0.2) inset;
 }
 
 .item {
@@ -18,9 +21,9 @@
 	cursor: grab;
 }
 
-.item p {
-	margin: 0;
-	padding: 0;
+input {
+	background: transparent;
+	border: none;
 }
 
 .input {
@@ -30,7 +33,7 @@
 }
 
 .item:focus {
-	background-color : aqua;
+	background-color : rgba(0, 255, 255, 0.4);
 }
 
 .buttons ul {
@@ -49,13 +52,12 @@
 }
 
 button {
+	box-shadow: 2px 2px 12px 0px rgba(34, 60, 80, 0.2);
 	cursor: pointer;
-	display: block;
-	background-color: #999;
-	height: 24px;
-	width: 80px;
-	font-weight: 600;
-	border: none;
+	height: 32px;
+	width: 120px;
+	border-radius: 3px;
+	border: 1px solid #999;
 }
 
 .itemTreesContainer {
